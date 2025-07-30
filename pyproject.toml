@@ -1,0 +1,17 @@
+[project]
+name = "agile"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.4",
+    "argon2-cffi>=25.1.0",
+    "fastapi[all]>=0.116.1",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary>=2.9.10",
+    "python-jose>=3.5.0",
+    "sqlalchemy>=2.0.41",
+    "starlette-admin>=0.15.1",
+    "uvicorn>=0.35.0",
+]
