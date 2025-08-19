@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.admin.settings import admin
 from app.routers.auth import router as auth_router
@@ -9,6 +10,18 @@ from app.routers.tasks import router as tasks_router
 from app.settings import MEDIA_DIR, MEDIA_URL
 
 app = FastAPI()
+
+
+
+# Frontend'dan kirishga ruxsat berish
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # React server URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 @app.get("/")
