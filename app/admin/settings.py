@@ -1,5 +1,4 @@
 from starlette_admin.contrib.sqla import Admin
-from starlette_admin.contrib.sqla.view import ModelView
 
 from app.admin.auth import JSONAuthProvider
 from app.admin.views import (
@@ -8,7 +7,6 @@ from app.admin.views import (
     NotificationAdminView,
     ProjectAdminView,
     ProjectMemberAdminView,
-    StatusAdminView,
     TaskAdminView,
     UserAdminView,
 )
@@ -19,7 +17,6 @@ from app.models import (
     Notification,
     Project,
     ProjectMember,
-    Status,
     Task,
     User,
 )
@@ -35,7 +32,6 @@ admin.add_view(UserAdminView(User, icon="fa fa-user"))
 admin.add_view(ProjectAdminView(Project, icon="fa fa-suitcase"))
 admin.add_view(ProjectMemberAdminView(ProjectMember, icon="fa fa-users"))
 admin.add_view(TaskAdminView(Task, icon="fa fa-tasks"))
-admin.add_view(StatusAdminView(Status, icon="fa fa-tasks"))
 admin.add_view(CommentAdminView(Comment, icon="fa fa-comment"))
 admin.add_view(NotificationAdminView(Notification, icon="fa fa-bell"))
 admin.add_view(AuditLogAdminView(AuditLog, icon="fa fa-history"))

@@ -85,7 +85,7 @@ class ProjectAdminView(ModelView):
         "key",
         "name",
         "description",
-        "owner_id",
+        "owner",
         "is_active",
         "is_private",
         "created_at",
@@ -103,7 +103,7 @@ class ProjectAdminView(ModelView):
         "key",
         "name",
         "description",
-        "owner_id",
+        "owner",
         "is_active",
         "is_private",
         "created_at",
@@ -115,8 +115,8 @@ class ProjectAdminView(ModelView):
 class ProjectMemberAdminView(ModelView):
     fields: ClassVar[list[str]] = [
         "id",
-        "user_id",      
-        "project_id",
+        "user",
+        "project",
         "joined_at",
     ]
     exclude_fields_from_list: ClassVar[list[str]] = ["joined_at"]
@@ -169,23 +169,6 @@ class TaskAdminView(ModelView):
         "due_date",
         "created_at",
         "updated_at",
-    ]
-    export_types: ClassVar[list[str]] = ["csv", "excel", "pdf", "print"]
-
-
-class StatusAdminView(ModelView):
-    fields: ClassVar[list[str]] = [
-        "id",
-        "name",
-        "description",
-    ]
-    exclude_fields_from_list: ClassVar[list[str]] = []
-    exclude_fields_from_create: ClassVar[list[str]] = []
-    exclude_fields_from_edit: ClassVar[list[str]] = []
-    export_fields: ClassVar[list[str]] = [
-        "id",
-        "name",
-        "description",
     ]
     export_types: ClassVar[list[str]] = ["csv", "excel", "pdf", "print"]
 

@@ -9,14 +9,43 @@ from app.routers.projects import router as projects_router
 from app.routers.tasks import router as tasks_router
 from app.settings import MEDIA_DIR, MEDIA_URL
 
-app = FastAPI()
+import logging
+from contextlib import asynccontextmanager
+
+from app.websocket.manager import WSManager
+from app.websocket.routes import router as ws_router
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:     %(message)s - %(asctime)s",
+    handlers=[
+        logging.StreamHandler(),  # Output to console
+    ],
+)
+
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # before
+    logger.info("Starting application...")
+    ws_manager = WSManager()
+    app.state.ws_manager = ws_manager
+    yield
+    # after
+    logger.info("Stopping application...")
+
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 
 # Frontend'dan kirishga ruxsat berish
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React server URL
+    allow_origins=["http://localhost:3000"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,6 +61,7 @@ async def hello():
 app.include_router(auth_router)
 app.include_router(projects_router)
 app.include_router(tasks_router)
+app.include_router(ws_router)
 
 
 def custom_openapi():
